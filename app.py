@@ -74,10 +74,20 @@ while True:
                                         pref=['iya','tidak','bisa jadi']
                                         jawab=random.choice(pref)
                                         tts = gTTS(text=jawab,lang='id',slow=False)
-                                        tts.save('tts-temp.mp3')
-                                        line.sendAudio(receiver, 'tts-temp.mp3')
+                                        tts.save('temp.mp3')
+                                        line.sendAudio(receiver, 'temp.mp3')
                                     except Exception as e:
-                                        line.log('Send Audio Failed ' + str(e))
+                                        line.sendMessage(msg.to, 'Send Audio Failed ' + str(e))
+                                elif '.yt.audio ' in text.lower():
+                                    try:
+                                        ur=urllib.request
+                                        query=text.lower().replace('.yt.audio ','')
+                                        url='http://rahandiapi.herokuapp.com/youtubeapi/search?key=betakey&q=%s'%(query)
+                                        output=json.loads(ur.urlopen(url).read().decode())
+                                        mp3=output['result']['audiolist']['url'][4]
+                                        line.sendAudioWithUrl(msg.to, mp3)
+                                    except Exception as e:
+                                    	line.sendMessage(msg.to, str(e))
                                 elif text.lower() == '.set':
                                     try:
                                         del ciduk['state'][receiver]
