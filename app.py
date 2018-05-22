@@ -91,6 +91,19 @@ while True:
                                         line.sendMessage(msg.to, pesan)
                                     except Exception as e:
                                     	line.sendMessage(msg.to, str(e))
+                                elif '.yt.video ' in text.lower():
+                                    try:
+                                        ur=urllib.request
+                                        query=text.lower().replace('.yt.audio ','')
+                                        query2= query.replace(' ', '+')
+                                        url='http://rahandiapi.herokuapp.com/youtubeapi/search?key=betakey&q=%s'%(query2)
+                                        output=json.loads(ur.urlopen(url).read().decode())
+                                        mp3=output['result']['videolist'][4]['url']
+                                        title=output['result']['title']
+                                        pesan='%s\nLink : %s'%(title,mp3)
+                                        line.sendMessage(msg.to, pesan)
+                                    except Exception as e:
+                                    	line.sendMessage(msg.to, str(e))
                                 elif text.lower() == '.set':
                                     try:
                                         del ciduk['state'][receiver]
