@@ -82,7 +82,8 @@ while True:
                                     try:
                                         ur=urllib.request
                                         query=text.lower().replace('.yt.audio ','')
-                                        url='http://rahandiapi.herokuapp.com/youtubeapi/search?key=betakey&q=%s'%(query)
+                                        query2= query.replace(' ', '+')
+                                        url='http://rahandiapi.herokuapp.com/youtubeapi/search?key=betakey&q=%s'%(query2)
                                         output=json.loads(ur.urlopen(url).read().decode())
                                         mp3=output['result']['audiolist'][4]['url']
                                         title=output['result']['title']
