@@ -4,8 +4,8 @@ import json, random, tempfile, os, sys, urllib.request
 from gtts import gTTS
 
 
-line = LINE('EtDUqFz4UDnIj7dWb2zd.oT3/6Uoh2biElhXIRpcphq.D6madJDfDsE9Z7/vW1Oo1IFUZ31HuIz2y4g8L9VET8U=')
-#line = LINE('AUTHTOKEN')
+#line = LINE('')
+line = LINE('AUTHTOKEN')
 
 line.log("Auth Token : " + str(line.authToken))
 #line.log("Timeline Token : " + str(line.tl.channelAccessToken))
