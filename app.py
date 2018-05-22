@@ -85,7 +85,7 @@ while True:
                                         url='http://rahandiapi.herokuapp.com/youtubeapi/search?key=betakey&q=%s'%(query)
                                         output=json.loads(ur.urlopen(url).read().decode())
                                         mp3=output['result']['audiolist'][4]['url']
-                                        line.sendAudioWithUrl(msg.to, mp3)
+                                        line.sendAudioWithURL(msg.to, mp3)
                                     except Exception as e:
                                     	line.sendMessage(msg.to, str(e))
                                 elif text.lower() == '.set':
