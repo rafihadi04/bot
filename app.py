@@ -52,11 +52,11 @@ while True:
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
                             elif joox==True and jooxmid==sender:
-                                querynum=int(text.lower())
+                                querynum=int(text)
                                 ur=urllib.request
                                 url='http://api.secold.com/joox/cari/%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
-                                queries=data['results'][int(querynum)]['songid']
+                                queries=data['results'][querynum]['songid']
                                 url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
                                 r=requests.get(url)
                                 obj=r.text
