@@ -57,14 +57,14 @@ while True:
                                 url='http://api.secold.com/joox/cari/%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
                                 queries=data['results'][int(querynum)]['songid']
-                                url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%queries
+                                url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
                                 r=requests.get(url)
                                 obj=r.text
                                 def json_from_s(s):
                                     match = re.findall(r"{.+[:,].+}|\[.+[,:].+\]", s)
                                     return json.loads(match[0]) if match else None
                                 joox=False
-                                line.sendMessage(receiver, json_from_s(obj)['mp3Url'])
+                                line.sendMessage(receiver, str(json_from_s(obj)['mp3Url']))
                             elif spam==True:
                                 # Chat checked request
                                 line.sendChatChecked(receiver, msg_id)
@@ -99,7 +99,6 @@ while True:
                                         artis=data['results'][i]['artist']
                                         pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
                                         i+=1
-                                    print('haha '+pesan)
                                     line.sendMessage(receiver, str(pesan))
                                     print(pesan)
                                     joox=True
