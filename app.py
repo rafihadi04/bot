@@ -22,6 +22,7 @@ admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
 jooxmem=''
 query=''
+querynum=''
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
