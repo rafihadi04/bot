@@ -9,6 +9,12 @@ proxyDict={
             "http":http_proxy,
             "https":https_proxy,
           }
+def restart_program():
+    """Restarts the current program.
+    Note: this function does not return. Any cleanup action (like
+    saving data) must be done before calling this function."""
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
 
 line = LINE('EtDUqFz4UDnIj7dWb2zd.oT3/6Uoh2biElhXIRpcphq.D6madJDfDsE9Z7/vW1Oo1IFUZ31HuIz2y4g8L9VET8U=')
 #line = LINE('AUTHTOKEN')
@@ -28,6 +34,9 @@ admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
 jooxmid=''
 query=''
+
+line.sendMessage(admin,"OnBro")
+
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
@@ -55,6 +64,9 @@ while True:
                                     elif text.lower() ==".boton":
                                         spam=True
                                         line.sendMessage(receiver, "Turning On.")
+                                    elif text.lower()==".reboot"
+                                        line.sendMessage(receiver, "Rebooting...")
+                                        restart_program()
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
                             elif joox==True and jooxmid==sender and text.lower() != '99':
