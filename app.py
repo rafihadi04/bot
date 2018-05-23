@@ -35,9 +35,9 @@ joox=False
 jooxmid=''
 query=''
 
-for i in range(admin):
+'''for i in range(admin):
     line.sendMessage(admin[i],"OnBro"
-
+'''
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
