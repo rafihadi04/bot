@@ -2,7 +2,13 @@
 from linepy import *
 import json, random, tempfile, os, sys, urllib.request, requests, re
 from gtts import gTTS
-
+http_proxy='http://103.241.205.66:8080'
+https_proxy='https://103.241.205.66:8080'
+#ftp_proxy='ftp://128.199.83.255:8080'
+proxyDict={
+            "http":http_proxy,
+            "https":https_proxy,
+          }
 
 line = LINE('EtDUqFz4UDnIj7dWb2zd.oT3/6Uoh2biElhXIRpcphq.D6madJDfDsE9Z7/vW1Oo1IFUZ31HuIz2y4g8L9VET8U=')
 #line = LINE('AUTHTOKEN')
@@ -60,7 +66,7 @@ while True:
                                 line.sendMessage(receiver, str(queries))
                                 print(queries)
                                 url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
-                                r=requests.get(url)
+                                r=requests.get(url, proxies=proxyDict)
                                 obj=r.text
                                 line.sendMessage(receiver, str(obj))
                                 def json_from_s(s):
