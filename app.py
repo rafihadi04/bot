@@ -35,7 +35,8 @@ joox=False
 jooxmid=''
 query=''
 
-line.sendMessage(admin,"OnBro")
+for i in range(admin):
+    line.sendMessage(admin[i],"OnBro"
 
 while True:
     try:
