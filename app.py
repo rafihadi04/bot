@@ -9,12 +9,6 @@ proxyDict={
             "http":http_proxy,
             "https":https_proxy,
           }
-def restart_program():
-    """Restarts the current program.
-    Note: this function does not return. Any cleanup action (like
-    saving data) must be done before calling this function."""
-    python = sys.executable
-    os.execl(python, python, * sys.argv)
 
 line = LINE('EtDUqFz4UDnIj7dWb2zd.oT3/6Uoh2biElhXIRpcphq.D6madJDfDsE9Z7/vW1Oo1IFUZ31HuIz2y4g8L9VET8U=')
 #line = LINE('AUTHTOKEN')
@@ -67,6 +61,9 @@ while True:
                                         line.sendMessage(receiver, "Turning On.")
                                     elif text.lower()==".reboot":
                                         line.sendMessage(receiver, "Rebooting...")
+                                        def restart_program():
+                                            python = sys.executable
+                                            os.execl(python, python, * sys.argv)
                                         restart_program()
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
@@ -109,7 +106,7 @@ while True:
                                     #query=text.lower().replace('.joox ','')
                                     ur=urllib.request
                                     query=text.lower().replace('.joox ','').replace(' ','+')
-                                    line.sendMessage(receiver, query)
+                                    #line.sendMessage(receiver, query)
                                     url='http://api.secold.com/joox/cari/%s'%query
                                     data=json.loads(ur.urlopen(url).read().decode())
                                     #line.sendMessage(receiver, data['results'])
