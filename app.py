@@ -83,7 +83,7 @@ while True:
                                         pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
                                         sholat=False
                                         line.sendMessage(msg.to, pesan)
-                                elif text.lower()=='.joox ':
+                                elif '.joox ' in text.lower():
                                     #query=text.lower().replace('.joox ','')
                                     ur=urllib.request
                                     query=text.lower().replace('.joox ','').replace(' ','+')
