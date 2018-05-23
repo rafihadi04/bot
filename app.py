@@ -48,6 +48,20 @@ while True:
                                         line.sendMessage(receiver, "Turning On.")
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
+                            elif joox==True and sender==jooxmid:
+                                text=querynum
+                                #
+                                url='http://api.secold.com/joox/cari/%s'%query
+                                data=json.loads(ur.urlopen(url).read().decode())
+                                queries=data['results'][int(querynum)]['songid']
+                                url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%queries
+                                r=requests.get(url)
+                                obj=r.text
+                                def json_from_s(s):
+                                    match = re.findall(r"{.+[:,].+}|\[.+[,:].+\]", s)
+                                    return json.loads(match[0]) if match else None
+                                joox=False
+                                line.sendMessage(receiver, json_from_s(obj)['mp3Url'])
                             elif spam==True:
                                 # Chat checked request
                                 line.sendChatChecked(receiver, msg_id)
@@ -66,6 +80,23 @@ while True:
                                         pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
                                         sholat=False
                                         line.sendMessage(msg.to, pesan)
+                                elif text.lower()=='.joox ':
+                                    #query=text.lower().replace('.joox ','')
+                                    r=urllib.request
+                                    query=text.lower().replace('.joox ','').replace(' ','+')
+                                    url='http://api.secold.com/joox/cari/%s'%query
+                                    data=json.loads(ur.urlopen(url).read().decode())
+                                    l=len(data['results'])
+                                    i=0
+                                    pesan = 'Hasil'
+                                    for i in range(l):
+                                        judul=data['results'][i]['single']
+                                        artis=data['results'][i]['artist']
+                                        pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
+                                        i+=1
+                                    line.sendMessage(receiver, pesan)
+                                    joox=True
+                                    jooxmid=sender
                                 elif text.lower() == '.jadwal.sholat':
                                     line.sendMessage(receiver, 'Kirimkan Lokasi Anda')
                                     sholat=True
