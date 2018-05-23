@@ -57,9 +57,12 @@ while True:
                                 url='http://api.secold.com/joox/cari/%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
                                 queries=data['results'][querynum]['songid']
+                                line.sendMessage(receiver, str(queries))
+                                print(queries)
                                 url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
                                 r=requests.get(url)
                                 obj=r.text
+                                line.sendMessage(receiver, str(obj))
                                 def json_from_s(s):
                                     match = re.findall(r"{.+[:,].+}|\[.+[,:].+\]", s)
                                     return json.loads(match[0]) if match else None
