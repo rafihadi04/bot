@@ -64,7 +64,7 @@ while True:
                                     elif text.lower() ==".boton":
                                         spam=True
                                         line.sendMessage(receiver, "Turning On.")
-                                    elif text.lower()==".reboot"
+                                    elif text.lower()==".reboot":
                                         line.sendMessage(receiver, "Rebooting...")
                                         restart_program()
                                 except Exception as e:
