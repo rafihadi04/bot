@@ -66,7 +66,7 @@ while True:
                                             os.execl(python, python, * sys.argv)
                                         restart_program()
                                 except Exception as e:
-                                    line.log('ADMIN_Err '+srr(e))
+                                    line.log('ADMIN_Err '+str(e))
                             elif joox==True and jooxmid==sender and text.lower() != '99':
                                 querynum=int(text)
                                 ur=urllib.request
