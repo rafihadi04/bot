@@ -67,7 +67,7 @@ while True:
                                     match = re.findall(r"{.+[:,].+}|\[.+[,:].+\]", s)
                                     return json.loads(match[0]) if match else None
                                 joox=False
-                                line.sendMessage(receiver, str(json_from_s(obj)['mp3Url']))
+                                line.sendMessage(receiver, str(json_from_s(obj)))
                             elif spam==True:
                                 # Chat checked request
                                 line.sendChatChecked(receiver, msg_id)
