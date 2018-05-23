@@ -28,10 +28,10 @@ admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
 jooxmid=''
 query=''
+i=0
+for i in range(admin):
+    line.sendMessage(admin[i],"OnBro")
 
-'''for i in range(admin):
-    line.sendMessage(admin[i],"OnBro"
-'''
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
@@ -50,12 +50,13 @@ while True:
                     if msg.contentType == 0:
                         # Check only group chat
                         if msg.toType == 2:
+                            line.sendChatChecked(receiver, msg_id)
                             if (sender in admin) and spam==False :
                                 #CommandListAdmin
                                 try:
                                     if text.lower() == ".botoff":
-                                        spam=False
-                                        line.sendMessage(receiver, "Shuting down.")
+                                        #spam=False
+                                        line.sendMessage(receiver, "You already off.")
                                     elif text.lower() ==".boton":
                                         spam=True
                                         line.sendMessage(receiver, "Turning On.")
@@ -86,7 +87,7 @@ while True:
                                 line.sendMessage(receiver, str(json_from_s(obj)['mp3Url']))
                             elif spam==True:
                                 # Chat checked request
-                                line.sendChatChecked(receiver, msg_id)
+                                #line.sendChatChecked(receiver, msg_id)
                                 # Get sender contact
                                 #contact = line.getContact(sender)
                                 # Command list-not-admin
