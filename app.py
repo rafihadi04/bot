@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from linepy import *
-import json, random, tempfile, os, sys, urllib.request
+import json, random, tempfile, os, sys, urllib.request, requests, re
 from gtts import gTTS
 
 
-#line = LINE('')
-line = LINE('AUTHTOKEN')
+line = LINE('EtDUqFz4UDnIj7dWb2zd.oT3/6Uoh2biElhXIRpcphq.D6madJDfDsE9Z7/vW1Oo1IFUZ31HuIz2y4g8L9VET8U=')
+#line = LINE('AUTHTOKEN')
 
 line.log("Auth Token : " + str(line.authToken))
 #line.log("Timeline Token : " + str(line.tl.channelAccessToken))
@@ -19,6 +19,9 @@ ciduk = {
 }
 sholat=False
 admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
+joox=False
+jooxmem=''
+query=''
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
@@ -48,6 +51,20 @@ while True:
                                         line.sendMessage(receiver, "Turning On.")
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
+                            elif joox==True and sender==jooxmid:
+                                text=querynum
+                                ur=urllib.request
+                                url='http://api.secold.com/joox/cari/%s'%query
+                                data=json.loads(ur.urlopen(url).read().decode())
+                                queries=data['results'][int(querynum)]['songid']
+                                url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%queries
+                                r=requests.get(url)
+                                obj=r.text
+                                def json_from_s(s):
+                                    match = re.findall(r"{.+[:,].+}|\[.+[,:].+\]", s)
+                                    return json.loads(match[0]) if match else None
+                                joox=False
+                                line.sendMessage(receiver, json_from_s(obj)['mp3Url'])
                             elif spam==True:
                                 # Chat checked request
                                 line.sendChatChecked(receiver, msg_id)
@@ -66,6 +83,27 @@ while True:
                                         pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
                                         sholat=False
                                         line.sendMessage(msg.to, pesan)
+                                elif text.lower()=='.joox ':
+                                    #query=text.lower().replace('.joox ','')
+                                    ur=urllib.request
+                                    query=text.lower().replace('.joox ','').replace(' ','+')
+                                    line.sendMessage(receiver, query)
+                                    url='http://api.secold.com/joox/cari/%s'%query
+                                    data=json.loads(ur.urlopen(url).read().decode())
+                                    line.sendMessage(receiver, data['results'])
+                                    l=len(data['results'])
+                                    i=0
+                                    pesan = 'Hasil'
+                                    for i in range(l):
+                                        judul=data['results'][i]['single']
+                                        artis=data['results'][i]['artist']
+                                        pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
+                                        i+=1
+                                    print('haha '+pesan)
+                                    line.sendMessage(receiver, str(pesan))
+                                    print(pesan)
+                                    joox=True
+                                    jooxmid=sender
                                 elif text.lower() == '.jadwal.sholat':
                                     line.sendMessage(receiver, 'Kirimkan Lokasi Anda')
                                     sholat=True
