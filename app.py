@@ -21,6 +21,7 @@ sholat=False
 admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
 jooxmem=''
+query=''
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
@@ -52,7 +53,7 @@ while True:
                                     line.log('ADMIN_Err '+srr(e))
                             elif joox==True and sender==jooxmid:
                                 text=querynum
-                                #
+                                ur=urllib.request
                                 url='http://api.secold.com/joox/cari/%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
                                 queries=data['results'][int(querynum)]['songid']
@@ -96,6 +97,7 @@ while True:
                                         artis=data['results'][i]['artist']
                                         pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
                                         i+=1
+                                    print('haha '+pesan)
                                     line.sendMessage(receiver, str(pesan))
                                     print(pesan)
                                     joox=True
