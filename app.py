@@ -87,8 +87,10 @@ while True:
                                     #query=text.lower().replace('.joox ','')
                                     ur=urllib.request
                                     query=text.lower().replace('.joox ','').replace(' ','+')
+                                    line.sendMessage(receiver, query)
                                     url='http://api.secold.com/joox/cari/%s'%query
                                     data=json.loads(ur.urlopen(url).read().decode())
+                                    line.sendMessage(receiver, data['results'])
                                     l=len(data['results'])
                                     i=0
                                     pesan = 'Hasil'
