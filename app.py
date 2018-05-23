@@ -20,9 +20,8 @@ ciduk = {
 sholat=False
 admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
-jooxmem=''
+jooxmid=''
 query=''
-querynum=''
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
@@ -52,8 +51,8 @@ while True:
                                         line.sendMessage(receiver, "Turning On.")
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
-                            elif joox==True and sender==jooxmid:
-                                text=querynum
+                            elif joox==True and jooxmid==sender:
+                                querynum=int(text.lower())
                                 ur=urllib.request
                                 url='http://api.secold.com/joox/cari/%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
