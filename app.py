@@ -84,7 +84,7 @@ while True:
                                         line.sendMessage(msg.to, pesan)
                                 elif text.lower()=='.joox ':
                                     #query=text.lower().replace('.joox ','')
-                                    r=urllib.request
+                                    ur=urllib.request
                                     query=text.lower().replace('.joox ','').replace(' ','+')
                                     url='http://api.secold.com/joox/cari/%s'%query
                                     data=json.loads(ur.urlopen(url).read().decode())
@@ -96,7 +96,8 @@ while True:
                                         artis=data['results'][i]['artist']
                                         pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
                                         i+=1
-                                    line.sendMessage(receiver, pesan)
+                                    line.sendMessage(receiver, str(pesan))
+                                    print(pesan)
                                     joox=True
                                     jooxmid=sender
                                 elif text.lower() == '.jadwal.sholat':
