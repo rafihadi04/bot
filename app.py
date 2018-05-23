@@ -57,23 +57,23 @@ while True:
                                         line.sendMessage(receiver, "Turning On.")
                                 except Exception as e:
                                     line.log('ADMIN_Err '+srr(e))
-                            elif joox==True and jooxmid==sender:
+                            elif joox==True and jooxmid==sender and text.lower() != '99':
                                 querynum=int(text)
                                 ur=urllib.request
                                 url='http://api.secold.com/joox/cari/%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
                                 queries=data['results'][querynum]['songid']
-                                line.sendMessage(receiver, str(queries))
-                                print(queries)
+                                line.sendMessage(receiver, 'Wait a sec..')
+                                #print(queries)
                                 url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
                                 r=requests.get(url, proxies=proxyDict)
                                 obj=r.text
-                                line.sendMessage(receiver, str(obj))
+                                #line.sendMessage(receiver, str(obj))
                                 def json_from_s(s):
                                     match = re.findall(r"{.+[:,].+}|\[.+[,:].+\]", s)
                                     return json.loads(match[0]) if match else None
                                 joox=False
-                                line.sendMessage(receiver, str(json_from_s(obj)))
+                                line.sendMessage(receiver, str(json_from_s(obj)['mp3Url']))
                             elif spam==True:
                                 # Chat checked request
                                 line.sendChatChecked(receiver, msg_id)
@@ -108,10 +108,15 @@ while True:
                                         artis=data['results'][i]['artist']
                                         pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
                                         i+=1
+                                    pesan+='\n99. Cancel'
                                     line.sendMessage(receiver, str(pesan))
-                                    print(pesan)
+                                    #print(pesan)
                                     joox=True
                                     jooxmid=sender
+                                elif text.lower()=="99":
+                                    line.sendMessage(receiver, 'Dibatalkan')
+                                    joox=False
+                                    jooxmid=''
                                 elif text.lower() == '.jadwal.sholat':
                                     line.sendMessage(receiver, 'Kirimkan Lokasi Anda')
                                     sholat=True
