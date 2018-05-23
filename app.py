@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from linepy import *
-import json, random, tempfile, os, sys, urllib.request
+import json, random, tempfile, os, sys, urllib.request, requests, re
 from gtts import gTTS
 
 
