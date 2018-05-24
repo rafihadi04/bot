@@ -10,7 +10,7 @@ proxyDict={
             "https":https_proxy,
           }
 
-line = LINE(AUTH_TOKEN)
+line = LINE(os.environ('AUTH_TOKEN'))
 #line = LINE('AUTHTOKEN')
 
 line.log("Auth Token : " + str(line.authToken))
