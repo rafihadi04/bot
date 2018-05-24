@@ -213,7 +213,7 @@ while True:
                                 if ".broadcast " in text.lower():
                                     if sender in admin:
                                         pesan=text.lower().replace('.broadcast ','')
-                                        allgrup=line.getGroupIdsJoined
+                                        allgrup=line.getGroups()
                                         line.sendMessage(sender, str(allgrup))
                                         for i in range(len(allgrup)):
                                             line.sendMesssage(allgrup[i],pesan)
