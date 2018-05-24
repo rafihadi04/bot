@@ -208,11 +208,12 @@ while True:
                             else:
                                 pass
                         elif msg.toType==0:
-                            line.sendChatChecked(receiver, msg_id)
+                            line.sendChatChecked(sender, msg_id)
                             try:
-                                if ".broadcast " in text.lower():
+                                if ".broadcast " in text:
                                     if sender in admin:
-                                        pesan=text.lower().replace('.broadcast ','')
+                                        #line.sendChatChecked(sender, msg_id)
+                                        pesan=text.replace('.broadcast ','')
                                         pesan2="[Broadcast from Admin]\n\n"+pesan
                                         allgrup=line.getGroupIdsJoined()
                                         #line.sendMessage(sender, str(allgrup))
