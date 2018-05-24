@@ -217,7 +217,7 @@ while True:
                                         allgrup=line.getGroupIdsJoined()
                                         #line.sendMessage(sender, str(allgrup))
                                         for i in range(len(allgrup)):
-                                            line.sendMessage(allgrup[i],pesan)
+                                            line.sendMessage(allgrup[i],pesan2)
                                         line.sendMessage(sender, "Done!")
                                     else:
                                         line.sendMessage(sender, "You are not admin")
