@@ -10,7 +10,7 @@ proxyDict={
             "https":https_proxy,
           }
 
-line = LINE('EtDUqFz4UDnIj7dWb2zd.oT3/6Uoh2biElhXIRpcphq.D6madJDfDsE9Z7/vW1Oo1IFUZ31HuIz2y4g8L9VET8U=')
+line = LINE(AUTH_TOKEN)
 #line = LINE('AUTHTOKEN')
 
 line.log("Auth Token : " + str(line.authToken))
@@ -28,7 +28,6 @@ admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
 jooxmid=''
 query=''
-i=0
 for i in range(len(admin)):
     line.sendMessage(admin[i],"OnBro")
 
@@ -207,7 +206,23 @@ while True:
                                 else:
                                     pass
                             else:
-                                pass 
+                                pass
+                        elif msg.toType==0:
+                            line.sendChatChecked(receiver, msg_id)
+                            try:
+                                if ".broadcast " in text.lower():
+                                    if sender in admin:
+                                        pesan=text.lower().replace('.broadcast ','')
+                                        allgrup=line.getGroupIdsJoined
+                                        for i in range(len(allgrup)):
+                                            line.sendMesssage(allgrup[i],pesan)
+                                        line.sendMessage(sender, "Done!")
+                                    else:
+                                        line.sendMessage(sender, "You are not admin")
+                                else:
+                                    line.sendMessage(sender, "Tidak ada perintah")
+                            except Exception as e:
+                                line.sendMessage(sender, str(e))
                 except Exception as e:
                     line.log("[RECEIVE_MESSAGE] ERROR : " + str(e))
             # Auto join if BOT invited to group
