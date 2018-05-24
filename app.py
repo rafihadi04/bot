@@ -214,6 +214,7 @@ while True:
                                     if sender in admin:
                                         pesan=text.lower().replace('.broadcast ','')
                                         allgrup=line.getGroupIdsJoined
+                                        line.sendMessage(sender, str(allgrup))
                                         for i in range(len(allgrup)):
                                             line.sendMesssage(allgrup[i],pesan)
                                         line.sendMessage(sender, "Done!")
