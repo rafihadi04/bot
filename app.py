@@ -123,6 +123,9 @@ while True:
                                     #print(pesan)
                                     joox=True
                                     jooxmid=sender
+                                elif text.lower()=='.cuaca':
+                                    url='https://dataweb.bmkg.go.id/Satelit/IMAGE/HIMA/H08_EH_Indonesia.png'
+                                    line.sendImageWithURL(receiver,url)
                                 elif text.lower()=="99":
                                     line.sendMessage(receiver, 'Dibatalkan')
                                     joox=False
