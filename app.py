@@ -104,7 +104,7 @@ while True:
                                         line.sendMessage(msg.to, pesan)
                                 elif '.joox ' in text.lower():
                                     #query=text.lower().replace('.joox ','')
-                                    ur=urllib.request
+                                    '''ur=urllib.request
                                     query=text.lower().replace('.joox ','').replace(' ','+')
                                     #line.sendMessage(receiver, query)
                                     url='http://api.secold.com/joox/cari/%s'%query
@@ -123,6 +123,8 @@ while True:
                                     #print(pesan)
                                     joox=True
                                     jooxmid=sender
+                                    '''
+                                    line.sendMessage(receiver,'Maaf fitur ini tidak dapat digunakan sementara')
                                 elif text.lower()=='.cuaca':
                                     url='https://dataweb.bmkg.go.id/Satelit/IMAGE/HIMA/H08_EH_Indonesia.png'
                                     line.sendImageWithURL(receiver,url)
@@ -237,10 +239,18 @@ while True:
                     group_id=op.param1
                     # Accept group invitation
                     line.acceptGroupInvitation(group_id)
+                    '''line.sendMessage(group_id, 'Hai!!\nSaya botnya Rafi.\nSalam kenal :)')
+                    line.sendContact(group_id, mid=admin[0])
+                    '''
+                except Exception as e:
+                    line.log("[NOTIFIED_INVITE_INTO_GROUP] ERROR : " + str(e))
+            elif op.type == OpType.NOTIFIED_ACCEPT_GROUP_INVITATION:
+                try:
+                    group_id=op.param1
                     line.sendMessage(group_id, 'Hai!!\nSaya botnya Rafi.\nSalam kenal :)')
                     line.sendContact(group_id, mid=admin[0])
                 except Exception as e:
-                    line.log("[NOTIFIED_INVITE_INTO_GROUP] ERROR : " + str(e))
+                    line.sendMessage(op.param1, str(e))
             elif op.type == OpType.SEND_MESSAGE:
                 msg = op.message
                 msg_id = msg.id
