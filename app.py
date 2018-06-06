@@ -102,6 +102,20 @@ while True:
                                         pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
                                         sholat=False
                                         line.sendMessage(msg.to, pesan)
+                                elif '.ig ' in text.lower():
+                                    query=text.replace('.ig ','')
+                                    url = 'https://api.dzin.tech/api/instaprofile/?apikey=beta&username=%s'%(query)
+                                    r=requests.get(url)
+                                    data=r.json()
+                                    name=data['result']['name']
+                                    urlphoto=data['result']['photo']
+                                    stateig=data['result']['private']
+                                    following=data['result']['following']
+                                    followers=data['result']['followers']
+                                    upload=data['result']['mediacount']
+                                    pesen='[Stalk IG]\n\nName : %s\nFollowers : %s\nFollowing : %s\nPrivate : %s\nUpload : %s\nUrl : %s'%(name,followers,following,stateig,upload,urlphoto)
+                                    line.sendMessage(receiver,pesen)
+                                    line.sendImageWithURL(receiver,str(urlphoto))
                                 elif '.joox ' in text.lower():
                                     #query=text.lower().replace('.joox ','')
                                     '''ur=urllib.request
