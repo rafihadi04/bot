@@ -281,6 +281,9 @@ while True:
                            elif text.lower()=='.spamoff':
                                spam==False
                                print('Spam OFF')
+                           elif text.lower()==".spam":
+                               for i in range(3000):
+                                   line.sendMessage(receiver, "SPAM")
                            
                            else:
                                pass
