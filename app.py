@@ -139,6 +139,21 @@ while True:
                                     jooxmid=sender
                                     '''
                                     line.sendMessage(receiver,'Maaf fitur ini tidak dapat digunakan sementara')
+                                elif text.lower()=='.today.match':
+                                    url = 'http://worldcup.sfg.io/matches/today'
+                                    ur=requests.get(url)
+                                    data=ur.json()
+                                    stadion=data[0]['location']
+                                    home=data[0]['home_team']['country']
+                                    away=data[0]['away_team']['country']
+                                    home1=data[0]['home_team']['score']
+                                    away1=data[0]['away_team']['score']
+                                    txt='''[Pertandingan Hari Ini]
+                                    \nStadion : %s
+                                    \n%s - %s
+                                    \n%s - %s
+                                    ''' % (stadion,home,away,home1,away1)
+                                    line.sendMessage(msg.to, txt)
                                 elif text.lower()=='.cuaca':
                                     url='https://dataweb.bmkg.go.id/Satelit/IMAGE/HIMA/H08_EH_Indonesia.png'
                                     line.sendImageWithURL(receiver,url)
