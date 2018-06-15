@@ -146,8 +146,8 @@ while True:
                                     stadion=data[0]['location']
                                     home=data[0]['home_team']['country']
                                     away=data[0]['away_team']['country']
-                                    home1=data[0]['home_team']['score']
-                                    away1=data[0]['away_team']['score']
+                                    home1=data[0]['home_team']['goals']
+                                    away1=data[0]['away_team']['goals']
                                     txt='''[Pertandingan Hari Ini]
                                     \nStadion : %s
                                     \n%s - %s
