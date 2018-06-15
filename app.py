@@ -149,9 +149,9 @@ while True:
                                     home1=data[0]['home_team']['goals']
                                     away1=data[0]['away_team']['goals']
                                     txt='''[Pertandingan Hari Ini]
-                                    \nStadion : %s
-                                    \n%s - %s
-                                    \n%s - %s
+                                    Stadion : %s
+                                    %s - %s
+                                    %s - %s
                                     ''' % (stadion,home,away,home1,away1)
                                     line.sendMessage(msg.to, txt)
                                 elif text.lower()=='.cuaca':
