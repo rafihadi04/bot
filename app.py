@@ -143,16 +143,23 @@ while True:
                                     url = 'http://worldcup.sfg.io/matches/today'
                                     ur=requests.get(url)
                                     data=ur.json()
-                                    stadion=data[0]['location']
+                                    '''stadion=data[0]['location']
                                     home=data[0]['home_team']['country']
                                     away=data[0]['away_team']['country']
                                     home1=data[0]['home_team']['goals']
-                                    away1=data[0]['away_team']['goals']
-                                    txt='''[Pertandingan Hari Ini]
-Stadion : %s
+                                    away1=data[0]['away_team']['goals']'''
+                                    txt='[Pertandingan Hari Ini]\n'
+                                    for l in range(len(data)):
+                                        stadion=data[l]['location']
+                                        home=data[l]['home_team']['country']
+                                        away=data[l]['away_team']['country']
+                                        home1=data[l]['home_team']['goals']
+                                        away1=data[l]['away_team']['goals']
+                                        txt+='''%s Stadion : %s
 %s - %s
 %s - %s
-''' % (stadion,home,away,home1,away1)
+''' % (l,stadion,home,away,home1,away1)
+                                    txt+='Terima Kasih telah menggunakan layanan ini'
                                     line.sendMessage(msg.to, txt)
                                 elif text.lower()=='.cuaca':
                                     url='https://dataweb.bmkg.go.id/Satelit/IMAGE/HIMA/H08_EH_Indonesia.png'
@@ -176,7 +183,7 @@ Stadion : %s
                                 elif '.yt.audio ' in text.lower():
                                     try:
                                         ur=urllib.request
-                                        query=text.lower().replace('.yt.audio ','')
+                                        query=text.lower().replace('.y.audio ','')
                                         query2= query.replace(' ', '+')
                                         url='http://rahandiapi.herokuapp.com/youtubeapi/search?key=betakey&q=%s'%(query2)
                                         output=json.loads(ur.urlopen(url).read().decode())
