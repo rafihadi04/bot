@@ -155,10 +155,13 @@ while True:
                                         away=data[l]['away_team']['country']
                                         home1=data[l]['home_team']['goals']
                                         away1=data[l]['away_team']['goals']
+                                        tanggal=data[l]['datetime']
                                         txt+='''%s Stadion : %s
-%s - %s
-%s - %s
-''' % (l,stadion,home,away,home1,away1)
+  %s - %s
+  %s - %s
+  DateTime : %s
+
+''' % (l+1,stadion,home,away,home1,away1,tanggal)
                                     txt+='Terima Kasih telah menggunakan layanan ini'
                                     line.sendMessage(msg.to, txt)
                                 elif text.lower()=='.cuaca':
