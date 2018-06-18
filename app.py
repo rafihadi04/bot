@@ -161,6 +161,7 @@ while True:
                                         home1=data[l]['home_team']['goals']
                                         away1=data[l]['away_team']['goals']
                                         tanggal=data[l]['datetime']
+                                        status=data[l]['status']
                                         utc = datetime.strptime(tanggal, '%Y-%m-%dT%H:%M:%SZ')
                                         utc = utc.replace(tzinfo=from_zone)
                                         central = utc.astimezone(to_zone)
@@ -170,8 +171,9 @@ while True:
   %s - %s
   %s - %s
   DateTime : %s
+  Status : %s
 
-''' % (l+1,stadion,home,away,home1,away1,central)
+''' % (l+1,stadion,home,away,home1,away1,central,status)
                                     txt+='Terima Kasih telah menggunakan layanan ini'
                                     line.sendMessage(msg.to, txt)
                                 elif text.lower()=='.cuaca':
