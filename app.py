@@ -2,6 +2,11 @@
 from linepy import *
 import json, random, tempfile, os, sys, urllib.request, requests, re
 from gtts import gTTS
+from datetime import datetime
+from dateutil import tz
+from time import strftime, strptime
+from_zone = tz.gettz('UTC')
+to_zone = tz.gettz('Asia/Jakarta')
 http_proxy='http://103.241.205.66:8080'
 https_proxy='https://103.241.205.66:8080'
 #ftp_proxy='ftp://128.199.83.255:8080'
@@ -156,12 +161,17 @@ while True:
                                         home1=data[l]['home_team']['goals']
                                         away1=data[l]['away_team']['goals']
                                         tanggal=data[l]['datetime']
+                                        utc = datetime.strptime(tanggal, '%Y-%m-%dT%H:%M:%SZ')
+                                        utc = utc.replace(tzinfo=from_zone)
+                                        central = utc.astimezone(to_zone)
+                                        central = strptime(str(central),"%Y-%m-%d %H:%M:%S+07:00")
+                                        central = strftime('%a, %d %b %Y %H:%M:%S WIB', central)
                                         txt+='''%s Stadion : %s
   %s - %s
   %s - %s
   DateTime : %s
 
-''' % (l+1,stadion,home,away,home1,away1,tanggal)
+''' % (l+1,stadion,home,away,home1,away1,central)
                                     txt+='Terima Kasih telah menggunakan layanan ini'
                                     line.sendMessage(msg.to, txt)
                                 elif text.lower()=='.cuaca':
