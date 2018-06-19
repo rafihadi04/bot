@@ -280,6 +280,16 @@ while True:
                                         line.sendMessage(sender, "Done!")
                                     else:
                                         line.sendMessage(sender, "You are not admin")
+                                elif msg.text == ".list.group":
+                                    if sender in admin:
+                                        allgrup=line.getGroupIdsJoined()
+                                        txt=" [List Group] "
+                                        
+                                        for i in range(len(allgrup)):
+                                            namagrup=line.getGroup(allgrup[i])
+                                            txt+="\n%s %s"%(i+1,namagrup)
+                                        line.sendMessage(sender,txt)
+                                    else: line.sendMessage(sender,"You are not admin")
                                 else:
                                     line.sendMessage(sender, "Tidak ada perintah")
                             except Exception as e:
