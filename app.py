@@ -286,10 +286,10 @@ while True:
                                         txt=" [List Group] "
                                         i=0
                                         #for i in range(len(allgrup)):
-                                        namagrup=line.getGroup(allgrup[i])
+                                        namagrup=line.getGroup(allgrup[i]).name
                                         txt+="\n%s %s"%(i+1,namagrup)
                                         print(txt)
-                                        #line.sendMessage(sender,txt)
+                                        line.sendMessage(sender,txt)
                                     else: line.sendMessage(sender,"You are not admin")
                                 else:
                                     line.sendMessage(sender, "Tidak ada perintah")
