@@ -284,10 +284,10 @@ while True:
                                     if sender in admin:
                                         allgrup=line.getGroupIdsJoined()
                                         txt=" [List Group] "
-                                        
-                                        for i in range(len(allgrup)):
-                                            namagrup=line.getGroup(allgrup[i])
-                                            txt+="\n%s %s"%(i+1,namagrup)
+                                        i=0
+                                        #for i in range(len(allgrup)):
+                                        namagrup=line.getGroup(allgrup[i])
+                                        txt+="\n%s %s"%(i+1,namagrup)
                                         line.sendMessage(sender,txt)
                                     else: line.sendMessage(sender,"You are not admin")
                                 else:
