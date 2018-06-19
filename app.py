@@ -39,8 +39,8 @@ for i in range(len(admin)):
 while True:
     try:
         ops=oepoll.singleTrace(count=50)
-        
-        for op in ops:
+        if ops != None :
+          for op in ops:
             # Receive messages
             if op.type == OpType.RECEIVE_MESSAGE:
                 msg = op.message
