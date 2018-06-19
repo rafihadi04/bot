@@ -33,11 +33,10 @@ admin = ['uaf3ee63c94eb3c3f520f2cc8cb73082a']
 joox=False
 jooxmid=''
 query=''
-for i in range(len(admin)):
-    line.sendMessage(admin[i],"OnBro")
-
 while True:
     try:
+        for i in range(len(admin)):
+            line.sendMessage(admin[i],"OnBro")
         ops=oepoll.singleTrace(count=50)
         if ops != None :
           for op in ops:
