@@ -15,8 +15,8 @@ proxyDict={
             "https":https_proxy,
           }
 
-line = LINE(os.environ['AUTH_TOKEN'])
-#line = LINE('AUTHTOKEN')
+line = LINE(os.environ['email'],os.environ['pass'])
+#line = LINE()
 
 line.log("Auth Token : " + str(line.authToken))
 #line.log("Timeline Token : " + str(line.tl.channelAccessToken))
