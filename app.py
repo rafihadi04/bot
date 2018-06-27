@@ -44,7 +44,13 @@ while True:
         if ops != None :
           for op in ops:
             # Receive messages
-            if op.type == OpType.RECEIVE_MESSAGE:
+            if op.type == OpType.NOTIFIED_DESTROY_MESSAGE:
+                dari=''
+                pesan=''
+                txt='Unsend Message Detected\nfrom : %s\nmessage : %s'%(dari,pesan)
+                print(op)
+                #line.sendMessage(msg.to, txt)
+            elif op.type == OpType.RECEIVE_MESSAGE:
                 msg = op.message
                 #print(msg)
                 text = msg.text
@@ -52,8 +58,20 @@ while True:
                 receiver = msg.to
                 sender = msg._from
                 try:
+                    if  msg.location !=None:
+                        line.sendMessage(msg.to, 'Lokasi Diterima')
+                        lok=msg.location
+                        lat = lok.latitude
+                        lon = lok.longitude
+                        if sholat==True:
+                            ur=urllib.request
+                            url='https://time.siswadi.com/pray/'+str(lat)+'/'+str(lon)
+                            object=json.loads(ur.urlopen(url).read().decode())
+                            pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
+                            sholat=False
+                            line.sendMessage(msg.to, pesan)
                     # Check content only text message
-                    if msg.contentType == 0:
+                    elif msg.contentType == 0:
                         # Check only group chat
                         if msg.toType == 2:
                             line.sendChatChecked(receiver, msg_id)
@@ -97,7 +115,7 @@ while True:
                                 # Get sender contact
                                 #contact = line.getContact(sender)
                                 # Command list-not-admin
-                                if  msg.location !=None:
+                                '''if  msg.location !=None:
                                     line.sendMessage(msg.to, 'Lokasi Diterima')
                                     lok=msg.location
                                     lat = lok.latitude
@@ -108,7 +126,7 @@ while True:
                                         object=json.loads(ur.urlopen(url).read().decode())
                                         pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
                                         sholat=False
-                                        line.sendMessage(msg.to, pesan)
+                                        line.sendMessage(msg.to, pesan)'''
                                 elif '.ig ' in text.lower():
                                     query=text.replace('.ig ','')
                                     url = 'https://api.dzin.tech/api/instaprofile/?apikey=beta&username=%s'%(query)
@@ -296,7 +314,8 @@ while True:
                             except Exception as e:
                                 line.sendMessage(sender, str(e))
                     else:
-                        print (msg)
+                        #print (msg)
+                        pass
                 except Exception as e:
                     line.log("[RECEIVE_MESSAGE] ERROR : " + str(e))
             # Auto join if BOT invited to group
