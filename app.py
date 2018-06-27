@@ -127,7 +127,7 @@ while True:
                                         pesan='[Jadwal Sholat]\n\nSubuh %s\nDzuhur %s\nAshar %s\nMaghrib %s\nIsya %s\n\nPukul %s Waktu setempat' %(object['data']['Fajr'],object['data']['Dhuhr'],object['data']['Asr'],object['data']['Maghrib'],object['data']['Isha'],object['time']['time'])
                                         sholat=False
                                         line.sendMessage(msg.to, pesan)'''
-                                elif '.ig ' in text.lower():
+                                if '.ig ' in text.lower():
                                     query=text.replace('.ig ','')
                                     url = 'https://api.dzin.tech/api/instaprofile/?apikey=beta&username=%s'%(query)
                                     r=requests.get(url)
