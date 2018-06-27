@@ -295,6 +295,8 @@ while True:
                                     line.sendMessage(sender, "Tidak ada perintah")
                             except Exception as e:
                                 line.sendMessage(sender, str(e))
+                    else:
+                        print (msg)
                 except Exception as e:
                     line.log("[RECEIVE_MESSAGE] ERROR : " + str(e))
             # Auto join if BOT invited to group
