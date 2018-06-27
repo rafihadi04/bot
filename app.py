@@ -14,6 +14,30 @@ proxyDict={
             "http":http_proxy,
             "https":https_proxy,
           }
+helpmsg='''[Help Command List]
+.set
+Mengecek para sider dari sini
+.off
+Mematikan mode cyduk
+.tagall
+Tag semua orang
+.help
+Memunculkan kalimat ini
+.jadwal.sholat
+Meminta jadwal sholat dengan mengirimkan lokasi
+.yt.audio nama lagu
+.yt.video nama lagu
+.ig username
+Stalk ig
+.today.match
+Coba aja sendiri
+.creator
+Melihat pembuat grup
+Pertanyaan "Apakah ...." akan otomatis di jawab bot
+.joox nama lagu
+Kalau ada saran fitur, bisa lgsg lapor ke ane
+https://line.me/ti/p/Ll6JTVKCHt
+'''
 
 line = LINE(os.environ['AUTH_TOKEN'])
 #line = LINE()
@@ -95,9 +119,9 @@ while True:
                             elif joox==True and jooxmid==sender and text.lower() != '99':
                                 querynum=int(text)
                                 ur=urllib.request
-                                url='http://api.secold.com/joox/cari/%s'%query
+                                url='http://api.ntcorp.us/joox/search?q=%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
-                                queries=data['results'][querynum]['songid']
+                                queries=data['results'][querynum]['sid']
                                 line.sendMessage(receiver, 'Wait a sec..')
                                 #print(queries)
                                 url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
@@ -143,10 +167,10 @@ while True:
                                     line.sendImageWithURL(receiver,str(urlphoto))
                                 elif '.joox ' in text.lower():
                                     #query=text.lower().replace('.joox ','')
-                                    '''ur=urllib.request
+                                    ur=urllib.request
                                     query=text.lower().replace('.joox ','').replace(' ','+')
                                     #line.sendMessage(receiver, query)
-                                    url='http://api.secold.com/joox/cari/%s'%query
+                                    url='http://api.ntcorp.us/joox/search?q=%s'%query
                                     data=json.loads(ur.urlopen(url).read().decode())
                                     #line.sendMessage(receiver, data['results'])
                                     l=len(data['results'])
@@ -162,8 +186,8 @@ while True:
                                     #print(pesan)
                                     joox=True
                                     jooxmid=sender
-                                    '''
-                                    line.sendMessage(receiver,'Maaf fitur ini tidak dapat digunakan sementara')
+                                    
+                                    #line.sendMessage(receiver,'Maaf fitur ini tidak dapat digunakan sementara')
                                 elif text.lower()=='.today.match':
                                     url = 'http://worldcup.sfg.io/matches/today'
                                     ur=requests.get(url)
@@ -279,6 +303,8 @@ while True:
                                 elif text.lower()=='.boton':
                                     if sender in admin : line.sendMessage(receiver, 'You Already On')
                                     else: line.sendMessage(receiver, 'You Are not Admin')
+                                elif text.lower()=='.help':
+                                    line.sendMessage(receiver,helpmsg)
                                 else:
                                     pass
                             else:
