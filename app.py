@@ -121,7 +121,7 @@ while True:
                                 ur=urllib.request
                                 url='http://api.ntcorp.us/joox/search?q=%s'%query
                                 data=json.loads(ur.urlopen(url).read().decode())
-                                queries=data['results'][querynum]['sid']
+                                queries=data['result'][querynum]['sid']
                                 line.sendMessage(receiver, 'Wait a sec..')
                                 #print(queries)
                                 url='http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=%s'%(str(queries))
@@ -173,12 +173,12 @@ while True:
                                     url='http://api.ntcorp.us/joox/search?q=%s'%query
                                     data=json.loads(ur.urlopen(url).read().decode())
                                     #line.sendMessage(receiver, data['results'])
-                                    l=len(data['results'])
+                                    l=len(data['result'])
                                     i=0
                                     pesan = 'Hasil'
                                     for i in range(l):
-                                        judul=data['results'][i]['single']
-                                        artis=data['results'][i]['artist']
+                                        judul=data['result'][i]['single']
+                                        artis=data['result'][i]['artist']
                                         pesan+='\n%d. %s - %s'%(i,str(artis),str(judul))
                                         i+=1
                                     pesan+='\n99. Cancel'
