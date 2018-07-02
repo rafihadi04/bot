@@ -327,12 +327,12 @@ while True:
                                 elif msg.text == ".list.group":
                                     if sender in admin:
                                         allgrup=line.getGroupIdsJoined()
-                                        txt="[List Group] "
+                                        txte="[List Group] "
                                         
-                                        for i in range(len(allgrup)):
+                                        '''for i in range(len(allgrup)):
                                             namagrup=line.getGroup(allgrup[i]).name
-                                            txt+="\n%s. %s"%(i+1,namagrup)
-                                        print(txt)
+                                            txte+="\n%s. %s"%(i+1,namagrup)'''
+                                        print(str(allgrup))
                                         #line.sendMessage(sender,txt)
                                     else: line.sendMessage(sender,"You are not admin")
                                 else:
