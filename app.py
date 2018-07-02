@@ -328,12 +328,37 @@ while True:
                                     if sender in admin:
                                         allgrup=line.getGroupIdsJoined()
                                         txte="[List Group] "
-                                        
-                                        for i in range(len(allgrup)):
-                                            namagrup=line.getGroup(allgrup[i]).name
-                                            txte+="\n%s. %s"%(i+1,str(namagrup))
+                                        if len(allgrup) > 100:
+                                            for i in range(99):
+                                                namagrup=line.getGroup(allgrup[i]).name
+                                                txte+="\n%s. %s"%(i+1,str(namagrup))
+                                            line.sendMessage(sender,str(txte))
+                                            if len(allgrup) > 200:
+                                                txte="[List Group] "
+                                                for i in range(99):
+                                                    namagrup=line.getGroup(allgrup[i+99]).name
+                                                    txte+="\n%s. %s"%(i+100,str(namagrup))
+                                                line.sendMessage(sender,str(txte))
+                                                if len(allgrup) > 300:
+                                                    txte="[List Group] "
+                                                    for i in range(99):
+                                                        namagrup=line.getGroup(allgrup[i+199]).name
+                                                        txte+="\n%s. %s"%(i+200,str(namagrup))
+                                                    line.sendMessage(sender,str(txte))
+                                                    if len(allgrup) > 400:
+                                                       txte="[List Group] "
+                                                       for i in range(99):
+                                                           namagrup=line.getGroup(allgrup[i+299]).name
+                                                           txte+="\n%s. %s"%(i+300,str(namagrup))
+                                                       line.sendMessage(sender,str(txte))
+                                                    else:print("<400")
+                                                else:print("<300")
+                                            else:print("<200")
+                                        else:print("<100")
+                                        print('done')
+                                                
                                         # print(str(txte))
-                                        line.sendMessage(sender,str(txte))
+                                        
                                     else: line.sendMessage(sender,"You are not admin")
                                 else:
                                     line.sendMessage(sender, "Tidak ada perintah")
