@@ -328,26 +328,26 @@ while True:
                                     if sender in admin:
                                         allgrup=line.getGroupIdsJoined()
                                         txte="[List Group] "
-                                        if len(allgrup) > 100:
-                                            for i in range(99):
+                                        if len(allgrup) >= 100:
+                                            for i in range(100):
                                                 namagrup=line.getGroup(allgrup[i]).name
                                                 txte+="\n%s. %s"%(i+1,str(namagrup))
                                             line.sendMessage(sender,str(txte))
-                                            if len(allgrup) > 200:
+                                            if len(allgrup) >= 200:
                                                 txte="[List Group] "
-                                                for i in range(99):
+                                                for i in range(100):
                                                     namagrup=line.getGroup(allgrup[i+99]).name
                                                     txte+="\n%s. %s"%(i+100,str(namagrup))
                                                 line.sendMessage(sender,str(txte))
-                                                if len(allgrup) > 300:
+                                                if len(allgrup) >= 300:
                                                     txte="[List Group] "
-                                                    for i in range(99):
+                                                    for i in range(100):
                                                         namagrup=line.getGroup(allgrup[i+199]).name
                                                         txte+="\n%s. %s"%(i+200,str(namagrup))
                                                     line.sendMessage(sender,str(txte))
-                                                    if len(allgrup) > 400:
+                                                    if len(allgrup) >= 400:
                                                        txte="[List Group] "
-                                                       for i in range(99):
+                                                       for i in range(100):
                                                            namagrup=line.getGroup(allgrup[i+299]).name
                                                            txte+="\n%s. %s"%(i+300,str(namagrup))
                                                        line.sendMessage(sender,str(txte))
