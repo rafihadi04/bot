@@ -329,11 +329,11 @@ while True:
                                         allgrup=line.getGroupIdsJoined()
                                         txte="[List Group] "
                                         
-                                        '''for i in range(len(allgrup)):
+                                        for i in range(len(allgrup)):
                                             namagrup=line.getGroup(allgrup[i]).name
-                                            txte+="\n%s. %s"%(i+1,namagrup)'''
-                                        print(str(allgrup))
-                                        #line.sendMessage(sender,txt)
+                                            txte+="\n%s. %s"%(i+1,str(namagrup))
+                                        # print(str(txte))
+                                        line.sendMessage(sender,str(txte))
                                     else: line.sendMessage(sender,"You are not admin")
                                 else:
                                     line.sendMessage(sender, "Tidak ada perintah")
