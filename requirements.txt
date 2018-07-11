@@ -1,4 +1,3 @@
-linepy
 gtts
 requests
 python-dateutil
