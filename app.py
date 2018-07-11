@@ -39,8 +39,8 @@ Kalau ada saran fitur, bisa lgsg lapor ke ane
 https://line.me/ti/p/Ll6JTVKCHt
 '''
 
-line = LINE(os.environ['AUTH_TOKEN'])
-#line = LINE()
+#line = LINE(os.environ['AUTH_TOKEN'])
+line = LINE(os.environ['email'],os.environ['pass'])
 
 line.log("Auth Token : " + str(line.authToken))
 #line.log("Timeline Token : " + str(line.tl.channelAccessToken))
